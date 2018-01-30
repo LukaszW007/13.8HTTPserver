@@ -8,12 +8,12 @@ function readFile() {
         gloabalData = data;
     });
 }
-function readImage(){
+/*function readImage(){
     fs.readFile('./cat.jpg',function (err,data) {
         if (err) throw err;
         image=data;
     });
-}
+}*/
 
 var server = http.createServer(function (request, response) {
     response.setHeader("Content-Type", "text/html; charset=utf-8");
@@ -22,7 +22,7 @@ var server = http.createServer(function (request, response) {
         response.write(gloabalData.toString());
         response.end();
     } else {
-        readImage();
+        // readImage();
         response.statusCode = 404;
         response.write('<h1>404: Zła ścieżka!</h1>');
         response.write('<img src="./cat.jpg">');
