@@ -25,7 +25,8 @@ var server = http.createServer(function (request, response) {
         readImage();
         response.statusCode = 404;
         response.write('<h1>404: Zła ścieżka!</h1>');
-        response.end(image);
+        response.write('<img src="./cat.jpg">');
+        response.end();
     }
 });
 server.listen(8080);
