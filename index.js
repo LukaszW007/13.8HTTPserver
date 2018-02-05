@@ -3,30 +3,30 @@ var fs = require('fs');
 var gloabalData = 'empty';
 var image;
 
-function readFile() {
+function readTxtFile(response) {
     fs.readFile('./index.html', 'utf-8', function (err, data) {
         gloabalData = data;
+        response.write(gloabalData.toString());
+        response.end();
     });
 }
-/*function readImage(){
-    fs.readFile('./cat.jpg',function (err,data) {
-        if (err) throw err;
-        image=data;
+
+function readImage(response){
+    fs.readFile('cat.jpg','binary',function (err,data) {
+        response.writeHead(200, {"Content-Type": "image/jng"});
+        response.write(data, "binary");
+        response.end();
     });
-}*/
+}
+
 
 var server = http.createServer(function (request, response) {
     response.setHeader("Content-Type", "text/html; charset=utf-8");
     if (request.method === 'GET' && request.url === '/index') {
-        readFile();
-        response.write(gloabalData.toString());
-        response.end();
-    } else {
-        // readImage();
-        response.statusCode = 404;
-        response.write('<h1>404: Zła ścieżka!</h1>');
-        response.write('<img src="./cat.jpg">');
-        response.end();
+        readTxtFile(response);
+
+    } else if(request.method==='GET'){
+        readImage(response);
     }
 });
 server.listen(8080);
