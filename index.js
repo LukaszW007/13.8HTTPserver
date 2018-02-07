@@ -13,7 +13,7 @@ function readTxtFile(response) {
 
 function readImage(response){
     fs.readFile('cat.jpg','binary',function (err,data) {
-        response.writeHead(200, {"Content-Type": "image/jng"});
+        response.writeHead(200, {"Content-Type": "image/jpg"});
         response.write(data, "binary");
         response.end();
     });
